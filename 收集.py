@@ -1,8 +1,13 @@
 import openai
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 class StartupInternBot:
     def __init__(self):
-        self.client = openai.OpenAI(api_key=OpenAI_API_Key)
+        self.client = openai.OpenAI(api_key=OPENAI_API_KEY)
         self.chat_history = []
 
     def generate_question(self):
