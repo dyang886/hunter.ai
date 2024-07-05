@@ -2,3 +2,8 @@ __pycache__
 .vscode
 .DS_Store
 .env
+build
+*.bat
+*.spec
+dist/*
+!dist/*.exe

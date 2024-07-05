@@ -4,8 +4,11 @@ from matplotlib.font_manager import FontProperties
 import numpy as np
 from dotenv import load_dotenv
 import os
+import sys
 
-load_dotenv()
+base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+env_path = os.path.join(base_path, '.env')
+load_dotenv(env_path)
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 class SalesJobInterviewBot:
@@ -46,7 +49,7 @@ class SalesJobInterviewBot:
         return simulated_answer
 
     def evaluate_capabilities(self, answers, capabilities):
-        prompt = "根据以下职位所需能力和应试者的回答，评估应试者的能力匹配度（对于每个能力，你需要以编号列表的形式按顺序展示匹配度，满分为10分，每条列表中评估一个数字即可）："
+        prompt = "根据以下职位所需能力和应试者的回答，评估应试者的能力匹配度（对于每个能力，你需要以编号列表的形式按顺序展示匹配度，满分为10分，比如\n1. 5\n2. 7\n3. 4）："
         prompt += "\n\n职位所需能力：\n" + '\n'.join(capabilities)
         prompt += "\n\n应试者的回答：\n" + '\n'.join(answers)
         response = self.client.chat.completions.create(
