@@ -7,6 +7,7 @@ base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
 env_path = os.path.join(base_path, '.env')
 load_dotenv(env_path)
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+GPT_VERSION = "gpt-4o-mini"
 
 class StartupInternBot:
     def __init__(self):
@@ -36,7 +37,7 @@ class StartupInternBot:
             role = "老板" if message['role'] == 'user' else "系统"
             prompt += f"\n{role}: {message['content']}"
         response = self.client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model=GPT_VERSION,
             messages=[{"role": "system", "content": prompt}]
         )
         next_question = response.choices[0].message.content
@@ -56,7 +57,7 @@ class StartupInternBot:
             role = "老板" if message['role'] == 'user' else "系统"
             prompt += f"\n{role}: {message['content']}"
         response = self.client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model=GPT_VERSION,
             messages=[{"role": "system", "content": prompt}]
         )
         job_description = response.choices[0].message.content

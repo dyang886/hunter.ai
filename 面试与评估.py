@@ -10,11 +10,12 @@ base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
 env_path = os.path.join(base_path, '.env')
 load_dotenv(env_path)
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+GPT_VERSION = "gpt-4o-mini"
 
 class SalesJobInterviewBot:
     def __init__(self):
         self.client = openai.OpenAI(api_key=OPENAI_API_KEY)
-        self.gpt_model = "gpt-3.5-turbo"
+        self.gpt_model = GPT_VERSION
         self.chat_history = []
 
     def extract_capabilities(self, job_description):
